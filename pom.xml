@@ -28,6 +28,11 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<jaxb.version>2.3.0</jaxb.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -40,15 +45,77 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+
 	</dependencies>
+
+
 
 	<build>
 		<plugins>
+			<!-- Plugin para Spring Boot -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!-- Plugin JAXB para generar clases desde XSD -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>2.5.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<configuration>
+					<!-- Directorio donde se encuentran los esquemas XSD -->
+					<sources>
+						<source>${basedir}/src/main/resources/wsdl</source>
+					</sources>
+					<!-- Patrón para incluir los archivos XSD -->
+					<includes>
+						<include>**/*.xsd</include>
+					</includes>
+					<!-- Directorio de salida para las clases generadas -->
+<!--					<outputDirectory>${basedir}/src/main/java</outputDirectory>-->
+					<!-- Paquete para las clases generadas -->
+<!--					<packageName>guru.springframework.mb2g_jaxb.generated</packageName>-->
+					<!-- Archivo de binding -->
+					<bindingFiles>
+						<bindingFile>${basedir}/src/main/resources/wsdl/binding.xjb</bindingFile>
+					</bindingFiles>
+				</configuration>
+				<!--				<configuration>-->
+				<!--					<schemaDirectory>${basedir}/src/main/resources/</schemaDirectory>-->
+				<!--					<outputDirectory>${basedir}/src/main/java/com/germanfica/wsfe/generated</outputDirectory>-->
+				<!--					<packageName>com.germanfica.wsfe.generated</packageName>-->
+				<!--					<bindingDirectory>${basedir}/src/main/resources/wsdl</bindingDirectory>-->
+				<!--					<bindingFiles>binding.xjb</bindingFiles>-->
+				<!--				</configuration>-->
+			</plugin>
 		</plugins>
 	</build>
+
+
 
 </project>
