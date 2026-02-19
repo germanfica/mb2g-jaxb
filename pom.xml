@@ -79,6 +79,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
 				<version>2.5.0</version>
+<!--				<version>3.1.0</version>-->
 				<executions>
 					<execution>
 						<goals>
@@ -93,17 +94,17 @@
 						<source>${basedir}/src/main/resources/wsdl</source>
 					</sources>
 					<!-- Patrón para incluir los archivos XSD -->
-					<includes>
-						<include>**/*.xsd</include>
-					</includes>
+<!--					<includes>-->
+<!--						<include>**/*.xsd</include>-->
+<!--					</includes>-->
 					<!-- Directorio de salida para las clases generadas -->
 <!--					<outputDirectory>${basedir}/src/main/java</outputDirectory>-->
 					<!-- Paquete para las clases generadas -->
 <!--					<packageName>guru.springframework.mb2g_jaxb.generated</packageName>-->
 					<!-- Archivo de binding -->
-					<bindingFiles>
-						<bindingFile>${basedir}/src/main/resources/wsdl/binding.xjb</bindingFile>
-					</bindingFiles>
+<!--					<bindingFiles>-->
+<!--						<bindingFile>${basedir}/src/main/resources/wsdl/binding.xjb</bindingFile>-->
+<!--					</bindingFiles>-->
 				</configuration>
 				<!--				<configuration>-->
 				<!--					<schemaDirectory>${basedir}/src/main/resources/</schemaDirectory>-->
